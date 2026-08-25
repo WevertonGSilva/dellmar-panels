@@ -110,12 +110,18 @@ function Donut({ data }: { data: { name: string; value: number }[] }) {
   );
 }
 
-function DataTable({ type }: { type: "fleet" | "revenue" }) {
-  const fleet = [
+function DataTable({ type }: { type: "fleet-horse" | "fleet-trailer" | "revenue" }) {
+  const fleetHorse = [
     ["QRC1697", "2018", "DAF", "XF105 FTS 460A", "DESENGATADO"],
     ["QRD7144", "2018", "DAF", "XF105 FTS 460A", "DESENGATADO"],
     ["QRG7D38", "2019", "DAF", "XF105 FTS 460A", "DESENGATADO"],
     ["MRY5I72", "2012", "FACCHINI", "SR/FACCHINI SRF LO", "ATIVO - RODA"],
+  ];
+  const fleetTrailer = [
+    ["RBF2B37", "2019", "FACCHINI", "SIDER VANDERLEIA", "ATIVO"],
+    ["SGE9D01", "2020", "RANDON", "SIDER 4 EIXOS", "ATIVO"],
+    ["MTY0437", "2018", "LIBRELATO", "SIDER RODOTREM", "ATIVO"],
+    ["TOG3I63", "2021", "GUERRA", "SIDER VANDERLEIA", "MANUTENÇÃO"],
   ];
   const revenue = [
     ["SGI9H63", "RBF2B37", "SIDER VANDERLEIA", "ROMILDO GALVÃO SOARES", "GERSON.SILVA", "R$ 96.318,04", "137,60%"],
@@ -123,10 +129,12 @@ function DataTable({ type }: { type: "fleet" | "revenue" }) {
     ["QRJ4G28", "MTY0437", "SIDER RODOTREM", "LEANDRO SERRA SANTOS", "GERSON.SILVA", "R$ 111.940,39", "117,83%"],
     ["RBE1C00", "TOG3I63", "SIDER VANDERLEIA", "DEILTON LEAL NOBRE", "DANILO.FARIA", "R$ 81.241,24", "116,06%"],
   ];
-  const heads = type === "fleet"
+  const heads = type === "fleet-horse"
     ? ["Cavalo", "Ano fab", "Marca", "Modelo", "Status"]
+    : type === "fleet-trailer"
+    ? ["Carreta", "Ano fab", "Marca", "Modelo", "Status"]
     : ["Cavalo", "Carreta", "Tipo de carreta", "Motorista", "Gestor", "Faturamento", "% Meta"];
-  const rows = type === "fleet" ? fleet : revenue;
+  const rows = type === "fleet-horse" ? fleetHorse : type === "fleet-trailer" ? fleetTrailer : revenue;
   return (
     <div className="overflow-x-auto">
       <table className="w-full min-w-[620px] border-collapse text-left text-[11px]">
