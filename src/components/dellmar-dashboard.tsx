@@ -81,10 +81,17 @@ function VerticalBars({ data, height = 190 }: { data: { name?: string; year?: st
     <ChartContainer config={greenChart} className="w-full" style={{ height }}>
       <BarChart data={data} margin={{ top: 14, right: 4, left: -26, bottom: 4 }}>
         <CartesianGrid vertical={false} strokeDasharray="3 3" />
-        <XAxis dataKey={data[0]?.year ? "year" : "name"} tickLine={false} axisLine={false} fontSize={9} interval={0} />
+        <XAxis
+          dataKey={data[0]?.year ? "year" : "name"}
+          tickLine={false}
+          axisLine={false}
+          fontSize={9}
+          minTickGap={10}
+          tickFormatter={(value: string) => value.length > 11 ? `${value.slice(0, 9)}…` : value}
+        />
         <YAxis tickLine={false} axisLine={false} fontSize={9} />
         <Tooltip content={<ChartTooltipContent hideLabel />} />
-        <Bar dataKey="value" fill="var(--color-value)" radius={[2, 2, 0, 0]} maxBarSize={48} />
+        <Bar dataKey="value" fill="var(--color-value)" radius={[2, 2, 0, 0]} maxBarSize={48} isAnimationActive={false} />
       </BarChart>
     </ChartContainer>
   );
@@ -94,7 +101,7 @@ function Donut({ data }: { data: { name: string; value: number }[] }) {
   return (
     <ChartContainer config={multiChart} className="mx-auto h-[160px] w-full">
       <PieChart>
-        <Pie data={data} dataKey="value" nameKey="name" innerRadius={42} outerRadius={66} strokeWidth={2}>
+        <Pie data={data} dataKey="value" nameKey="name" innerRadius={42} outerRadius={66} strokeWidth={2} isAnimationActive={false}>
           {data.map((entry, index) => <Cell key={entry.name} fill={`var(--chart-${(index % 4) + 1})`} />)}
         </Pie>
         <Tooltip content={<ChartTooltipContent nameKey="name" />} />
