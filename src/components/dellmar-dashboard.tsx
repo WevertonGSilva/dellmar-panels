@@ -140,13 +140,14 @@ function DataTable({ type }: { type: "fleet" | "revenue" }) {
 function FleetTab() {
   return (
     <div className="space-y-4">
-      <div className="grid grid-cols-2 gap-3 lg:grid-cols-6">
+      <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-7">
         <Metric value="176" label="Cavalos" />
         <Metric value="313" label="Carretas" />
         <Metric value="133" label="Cavalos em operação" />
         <Metric value="54" label="Cavalos fora da operação" />
         <Metric value="177" label="Carretas em operação" />
         <Metric value="136" label="Carretas paradas" />
+        <Metric value="89" label="Carretas agregadas" />
       </div>
       <div className="grid gap-4 xl:grid-cols-12">
         <Panel title="Ano de carretas" className="xl:col-span-7"><VerticalBars data={trailerYears} /></Panel>
